@@ -1,0 +1,20 @@
+package padroes.estruturais.adapter;
+class BibliotecaExternaAPI {
+    public void buscarLivroPorCodigo(int codigo) {
+        System.out.println("API - Buscando livro: código " + codigo);
+    }
+}
+interface BibliotecaInterna {
+    void consultar(String isbn);
+}
+class BibliotecaAdapter implements BibliotecaInterna {
+    private BibliotecaExternaAPI api;
+
+    public BibliotecaAdapter(BibliotecaExternaAPI api) {
+        this.api = api;
+    }
+    public void consultar(String isbn) {
+        int codigoConvertido = isbn.hashCode();
+        api.buscarLivroPorCodigo(codigoConvertido);
+    }
+}
