@@ -1,0 +1,27 @@
+package padroes.comportamentais.visitor;
+interface Visitante {
+    void visitarSala(Sala s);
+    void visitarLaboratorio(Laboratorio l);
+}
+interface Estrutura {
+    void aceitar(Visitante v);
+}
+class Sala implements Estrutura {
+    String nome;
+    public Sala(String nome) { this.nome = nome; }
+    public void aceitar(Visitante v) { v.visitarSala(this); }
+}
+class Laboratorio implements Estrutura {
+    String nome;
+    public Laboratorio(String nome) { this.nome = nome; }
+
+    public void aceitar(Visitante v) { v.visitarLaboratorio(this); }
+}
+class RelatorioVisitor implements Visitante {
+    public void visitarSala(Sala s) {
+        System.out.println("Gerando relatório para sala: " + s.nome);
+    }
+    public void visitarLaboratorio(Laboratorio l) {
+        System.out.println("Gerando relatório para laboratório: " + l.nome);
+    }
+}
