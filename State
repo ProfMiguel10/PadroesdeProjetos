@@ -1,0 +1,19 @@
+package padroes.comportamentais.state;
+interface EstadoMatricula {
+    void processar();
+}
+class EmAnalise implements EstadoMatricula {
+    public void processar() { System.out.println("Em análise..."); }
+}
+class Aprovada implements EstadoMatricula {
+    public void processar() { System.out.println("Aprovada."); }
+}
+class Cancelada implements EstadoMatricula {
+    public void processar() { System.out.println("Cancelada."); }
+}
+class Matricula {
+    private EstadoMatricula estado;
+    public void setEstado(EstadoMatricula e) { estado = e; }
+    public void executar() { estado.processar(); }
+}
+
