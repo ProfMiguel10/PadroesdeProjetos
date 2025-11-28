@@ -1,0 +1,28 @@
+package padroes.estruturais.facade;
+class Financeiro {
+    public void validarPagamento() {
+        System.out.println("Pagamento.");
+    }
+}
+class Secretaria {
+    public void reservarVaga() {
+        System.out.println("Vaga reservada.");
+    }
+}
+class Biblioteca {
+    public void criarCadastro() {
+        System.out.println("Cadastro criado.");
+    }
+}
+class MatriculaFacade {
+    private Financeiro financeiro = new Financeiro();
+    private Secretaria secretaria = new Secretaria();
+    private Biblioteca biblioteca = new Biblioteca();
+    public void matricularAluno() {
+        financeiro.validarPagamento();
+        secretaria.reservarVaga();
+        biblioteca.criarCadastro();
+        System.out.println("Matrícula.");
+    }
+}
+
