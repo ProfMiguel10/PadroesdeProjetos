@@ -1,0 +1,15 @@
+package padroes.comportamentais.iterator;
+import java.util.List;
+import java.util.ArrayList;
+class Turma {
+    private List<String> alunos = new ArrayList<>();
+    public void adicionar(String nome) { alunos.add(nome); }
+    public List<String> getAlunos() { return alunos; }
+}
+class TurmaIterator {
+    private int index = 0;
+    private List<String> lista;
+    public TurmaIterator(Turma t) { this.lista = t.getAlunos(); }
+    public boolean temProximo() { return index < lista.size(); }
+    public String proximo() { return lista.get(index++); }
+}
