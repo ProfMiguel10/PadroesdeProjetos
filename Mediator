@@ -1,0 +1,25 @@
+package padroes.comportamentais.mediator;
+interface Setor {
+    void receber(String msg);
+}
+class Secretaria implements Setor {
+    public void receber(String msg) { System.out.println("Secretaria: " + msg); }
+}
+class Financeiro implements Setor {
+    public void receber(String msg) { System.out.println("Financeiro: " + msg); }
+}
+class Biblioteca implements Setor {
+    public void receber(String msg) { System.out.println("Biblioteca: " + msg); }
+}
+class MediadorFaculdade {
+    private Secretaria sec = new Secretaria();
+    private Financeiro fin = new Financeiro();
+    private Biblioteca bib = new Biblioteca();
+
+    public void notificar(Setor origem, String msg) {
+        if (!(origem instanceof Secretaria)) sec.receber(msg);
+        if (!(origem instanceof Financeiro)) fin.receber(msg);
+        if (!(origem instanceof Biblioteca)) bib.receber(msg);
+    }
+}
+
