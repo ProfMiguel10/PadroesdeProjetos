@@ -1,0 +1,32 @@
+// Produto
+interface Transporte { void entregar(); }
+
+// Produtos concretos
+class Caminhao implements Transporte {
+    public void entregar(){ System.out.println("Entrega por caminhão."); }
+}
+
+class Navio implements Transporte {
+    public void entregar(){ System.out.println("Entrega por navio."); }
+}
+
+// Criador
+abstract class Logistica {
+    abstract Transporte criarTransporte();
+}
+
+// Criadores concretos
+class LogisticaTerrestre extends Logistica {
+    Transporte criarTransporte(){ return new Caminhao(); }
+}
+
+class LogisticaMaritima extends Logistica {
+    Transporte criarTransporte(){ return new Navio(); }
+}
+
+public class MainFM {
+    public static void main(String[] args){
+        Logistica l = new LogisticaTerrestre();
+        l.criarTransporte().entregar();
+    }
+}
