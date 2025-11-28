@@ -1,0 +1,21 @@
+package padroes.comportamentais.observer;
+import java.util.ArrayList;
+import java.util.List;
+interface Observador {
+    void atualizar(String msg);
+}
+class Aluno implements Observador {
+    private String nome;
+    public Aluno(String nome) { this.nome = nome; }
+
+    public void atualizar(String msg) {
+        System.out.println(nome + " recebeu: " + msg);
+    }
+}
+class SistemaNotas {
+    private List<Observador> obs = new ArrayList<>();
+    public void adicionar(Observador o) { obs.add(o); }
+    public void novaNota(String aviso) {
+        for (Observador o : obs) o.atualizar(aviso);
+    }
+}
