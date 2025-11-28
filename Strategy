@@ -1,0 +1,18 @@
+package padroes.comportamentais.strategy;
+interface Desconto {
+    double calcular(double valor);
+}
+class DescontoPontualidade implements Desconto {
+    public double calcular(double valor) { return valor * 0.90; }
+}
+class DescontoConvenio implements Desconto {
+    public double calcular(double valor) { return valor * 0.85; }
+}
+class DescontoFidelidade implements Desconto {
+    public double calcular(double valor) { return valor * 0.80; }
+}
+class Mensalidade {
+    private Desconto desconto;
+    public void setDesconto(Desconto d) { desconto = d; }
+    public double calcular(double valor) { return desconto.calcular(valor); }
+}
