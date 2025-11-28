@@ -1,0 +1,43 @@
+package padroes.criacionais.builder;
+class PlanoCurso {
+    private String nomeCurso;
+    private int cargaHoraria;
+    private boolean temEstagio;
+    private boolean temTcc;
+    public void detalhes() {
+        System.out.println(
+            "Curso: " + nomeCurso + 
+            " | Carga Horária: " + cargaHoraria +
+            "h | Estágio: " + temEstagio + 
+            " | TCC: " + temTcc
+        );
+    }
+    public void setNomeCurso(String n) { this.nomeCurso = n; }
+    public void setCargaHoraria(int c) { this.cargaHoraria = c; }
+    public void setEstagio(boolean e) { this.temEstagio = e; }
+    public void setTcc(boolean t) { this.temTcc = t; }
+}
+interface PlanoCursoBuilder {
+    void definirNome();
+    void definirCarga();
+    void incluirEstagio();
+    void incluirTcc();
+    PlanoCurso getPlano();
+}
+class BuilderCursoADS implements PlanoCursoBuilder {
+    private PlanoCurso plano = new PlanoCurso();
+
+    public void definirNome() { plano.setNomeCurso("Análise e Desenvolvimento de Sistemas"); }
+    public void definirCarga() { plano.setCargaHoraria(2000); }
+    public void incluirEstagio() { plano.setEstagio(true); }
+    public void incluirTcc() { plano.setTcc(false); }
+
+    public PlanoCurso getPlano() { return plano; }
+}
+class CoordenadorCurso {
+    public PlanoCurso construir(PlanoCursoBuilder builder) {
+        builder.definirNome();
+        builder.definirCarga();
+        return builder.getPlano();
+    }
+}
