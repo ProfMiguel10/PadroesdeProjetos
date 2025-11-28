@@ -1,0 +1,22 @@
+package padroes.comportamentais.templatemethod;
+abstract class AvaliacaoFinal {
+    public final void executar() {
+        lerProva();
+        corrigir();
+        registrarNota();
+    }
+    protected void lerProva() {
+        System.out.println("Lendo arquivo da prova...");
+    }
+    protected abstract void corrigir();
+    protected abstract void registrarNota();
+}
+
+class ProvaObjetiva extends AvaliacaoFinal {
+    protected void corrigir() { System.out.println("Correção automática."); }
+    protected void registrarNota() { System.out.println("Registrando nota."); }
+}
+class ProvaDissertativa extends AvaliacaoFinal {
+    protected void corrigir() { System.out.println("Correção manual."); }
+    protected void registrarNota() { System.out.println("Registrando nota."); }
+}
