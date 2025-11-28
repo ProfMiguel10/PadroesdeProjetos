@@ -1,0 +1,20 @@
+package padroes.criacionais.prototype;
+interface Formulario extends Cloneable {
+    Formulario clonar();
+    void exibir();
+}
+class FormularioRequerimento implements Formulario {
+    private String tipo = "Requerimento";
+    private String conteudo = "Assunto.";
+
+    public Formulario clonar() {
+        try {
+            return (FormularioRequerimento) super.clone();
+        } catch (Exception e) {
+            throw new RuntimeException("Erro.");
+        }
+    }
+    public void exibir() {
+        System.out.println("Formulário: " + tipo + " | Conteúdo: " + conteudo);
+    }
+}
