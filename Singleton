@@ -1,0 +1,15 @@
+package padroes.criacionais.singleton;
+public class AcademicConfig {
+    private static AcademicConfig instance;
+    private String semestreAtual = "2025/2";
+    private AcademicConfig() {}
+    public static synchronized AcademicConfig getInstance() {
+        if (instance == null) {
+            instance = new AcademicConfig();
+        }
+        return instance;
+    }
+    public void exibirSemestre() {
+        System.out.println("Em operação: " + semestreAtual);
+    }
+}
