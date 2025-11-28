@@ -1,0 +1,31 @@
+package padroes.comportamentais.chain;
+abstract class SuporteHandler {
+    protected SuporteHandler proximo;
+
+    public SuporteHandler setProximo(SuporteHandler p) {
+        this.proximo = p;
+        return p;
+    }
+    public abstract void tratar(String tipo);
+}
+class SuporteTI extends SuporteHandler {
+    public void tratar(String tipo) {
+        if (tipo.equals("senha")) {
+            System.out.println("TI resolvendo problema de senha...");
+        } else if (proximo != null) proximo.tratar(tipo);
+    }
+}
+class SecretariaAcademica extends SuporteHandler {
+    public void tratar(String tipo) {
+        if (tipo.equals("matricula")) {
+            System.out.println("Secretaria resolvendo questão de matrícula...");
+        } else if (proximo != null) proximo.tratar(tipo);
+    }
+}
+class Coordenacao extends SuporteHandler {
+    public void tratar(String tipo) {
+        if (tipo.equals("aproveitamento")) {
+            System.out.println("Coordenação analisando aproveitamento de estudos...");
+        } else System.out.println("Nenhum setor conseguiu resolver.");
+    }
+}
