@@ -1,0 +1,40 @@
+package padroes.criacionais.abstractfactory;
+interface Laboratorio {
+    void abrir();
+}
+interface SalaInteligente {
+    void ativarRecursos();
+}
+class LabInformatica implements Laboratorio {
+    public void abrir() {
+        System.out.println("Laboratório de Informática");
+    }
+}
+class SalaInformatizada implements SalaInteligente {
+    public void ativarRecursos() {
+        System.out.println("Ativando.");
+    }
+}
+class LabSaude implements Laboratorio {
+    public void abrir() {
+        System.out.println("Laboratório.");
+    }
+}
+
+class SalaClinica implements SalaInteligente {
+    public void ativarRecursos() {
+        System.out.println("Iniciando");
+    }
+}
+interface CampusFactory {
+    Laboratorio criarLaboratorio();
+    SalaInteligente criarSala();
+}
+class CampusTI implements CampusFactory {
+    public Laboratorio criarLaboratorio() { return new LabInformatica(); }
+    public SalaInteligente criarSala() { return new SalaInformatizada(); }
+}
+class CampusSaude implements CampusFactory {
+    public Laboratorio criarLaboratorio() { return new LabSaude(); }
+    public SalaInteligente criarSala() { return new SalaClinica(); }
+}
