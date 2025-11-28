@@ -1,0 +1,19 @@
+package padroes.comportamentais.memento;
+class Grade {
+    private String conteudo;
+    public void setConteudo(String c) { conteudo = c; }
+    public String getConteudo() { return conteudo; }
+
+    public Memento salvar() { return new Memento(conteudo); }
+    public void restaurar(Memento m) { conteudo = m.getEstado(); }
+}
+class Memento {
+    private String estado;
+    public Memento(String e) { estado = e; }
+    public String getEstado() { return estado; }
+}
+class Historico {
+    private java.util.Stack<Memento> pilha = new java.util.Stack<>();
+    public void add(Memento m) { pilha.push(m); }
+    public Memento ultimo() { return pilha.pop(); }
+}
