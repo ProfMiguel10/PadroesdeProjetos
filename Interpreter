@@ -1,0 +1,126 @@
+package padroes.comportamentais.interpreter;
+interface Expressao {
+    boolean interpretar(Contexto ctx);
+}
+class Contexto {
+    public int faltas;
+    public Contexto(int f) { faltas = f; }
+}
+class ExpressaoMaior implements Expressao {
+    private int limite;
+    public ExpressaoMaior(int limite) { this.limite = limite; }
+    public boolean interpretar(Contexto ctx) {
+        return ctx.faltas > limite;
+    }
+}
+
+
+Cóidgo mais completo:
+
+package padroes.comportamentais.interpreter;
+
+// ===== Interface base =====
+interface Expressao {
+    boolean interpretar(Contexto ctx);
+}
+
+// ===== Contexto =====
+class Contexto {
+    public int faltas;
+
+    public Contexto(int faltas) {
+        this.faltas = faltas;
+    }
+}
+
+// ===== Expressões Terminais =====
+class Maior implements Expressao {
+    private int valor;
+
+    public Maior(int valor) {
+        this.valor = valor;
+    }
+
+    @Override
+    public boolean interpretar(Contexto ctx) {
+        return ctx.faltas > valor;
+    }
+}
+
+class Menor implements Expressao {
+    private int valor;
+
+    public Menor(int valor) {
+        this.valor = valor;
+    }
+
+    @Override
+    public boolean interpretar(Contexto ctx) {
+        return ctx.faltas < valor;
+    }
+}
+
+class Igual implements Expressao {
+    private int valor;
+
+    public Igual(int valor) {
+        this.valor = valor;
+    }
+
+    @Override
+    public boolean interpretar(Contexto ctx) {
+        return ctx.faltas == valor;
+    }
+}
+
+// ===== Expressões Não-Terminais =====
+class AndExpressao implements Expressao {
+    private Expressao esquerda;
+    private Expressao direita;
+
+    public AndExpressao(Expressao esq, Expressao dir) {
+        this.esquerda = esq;
+        this.direita = dir;
+    }
+
+    @Override
+    public boolean interpretar(Contexto ctx) {
+        return esquerda.interpretar(ctx) && direita.interpretar(ctx);
+    }
+}
+
+class OrExpressao implements Expressao {
+    private Expressao esquerda;
+    private Expressao direita;
+
+    public OrExpressao(Expressao esq, Expressao dir) {
+        this.esquerda = esq;
+        this.direita = dir;
+    }
+
+    @Override
+    public boolean interpretar(Contexto ctx) {
+        return esquerda.interpretar(ctx) || direita.interpretar(ctx);
+    }
+}
+
+// ===== Exemplo de uso com árvore sintática =====
+class MainInterpreterFaltas {
+    public static void main(String[] args) {
+
+        Contexto aluno = new Contexto(7);
+
+        // Construindo árvore:
+        // (faltas > 5) AND (faltas < 10)
+        Expressao regra =
+            new AndExpressao(
+                new Maior(5),
+                new Menor(10)
+            );
+
+        boolean resultado = regra.interpretar(aluno);
+
+        System.out.println("Regra atendida? " + resultado);
+    }
+}
+
