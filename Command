@@ -1,0 +1,19 @@
+package padroes.comportamentais.command;
+interface Acao {
+    void executar();
+}
+class PublicarNotas implements Acao {
+    public void executar() {
+        System.out.println("Notas publicadas.");
+    }
+}
+class RegistrarPresenca implements Acao {
+    public void executar() {
+        System.out.println("Presença registrada.");
+    }
+}
+class ExecutorAcoes {
+    public void realizar(Acao acao) {
+        acao.executar();
+    }
+}
