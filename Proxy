@@ -1,0 +1,25 @@
+package padroes.estruturais.proxy;
+interface SistemaProfessor {
+    void acessar();
+}
+class SistemaProfessorReal implements SistemaProfessor {
+    public void acessar() {
+        System.out.println("Acesso ao sistema.");
+    }
+}
+class SistemaProfessorProxy implements SistemaProfessor {
+    private SistemaProfessorReal real;
+    private String senha;
+
+    public SistemaProfessorProxy(String senha) {
+        this.senha = senha;
+    }
+    public void acessar() {
+        if ("acertou".equals(senha)) {
+            if (real == null) real = new SistemaProfessorReal();
+            real.acessar();
+        } else {
+            System.out.println("Acesso negado.");
+        }
+    }
+}
