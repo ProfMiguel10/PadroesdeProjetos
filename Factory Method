@@ -1,32 +1,39 @@
-// Produto
-interface Transporte { void entregar(); }
+package padroes.criacionais.factorymethod;
 
-// Produtos concretos
-class Caminhao implements Transporte {
-    public void entregar(){ System.out.println("Entrega por caminhão."); }
+interface Documento {
+    void emitir();
 }
 
-class Navio implements Transporte {
-    public void entregar(){ System.out.println("Entrega por navio."); }
-}
-
-// Criador
-abstract class Logistica {
-    abstract Transporte criarTransporte();
-}
-
-// Criadores concretos
-class LogisticaTerrestre extends Logistica {
-    Transporte criarTransporte(){ return new Caminhao(); }
-}
-
-class LogisticaMaritima extends Logistica {
-    Transporte criarTransporte(){ return new Navio(); }
-}
-
-public class MainFM {
-    public static void main(String[] args){
-        Logistica l = new LogisticaTerrestre();
-        l.criarTransporte().entregar();
+class HistoricoEscolar implements Documento {
+    public void emitir() {
+        System.out.println("Emitindo Histórico Escolar...");
     }
+}
+
+class DeclaracaoMatricula implements Documento {
+    public void emitir() {
+        System.out.println("Emitindo Declaração de Matrícula...");
+    }
+}
+
+class AtestadoFrequencia implements Documento {
+    public void emitir() {
+        System.out.println("Emitindo Atestado de Frequência...");
+    }
+}
+
+abstract class GeradorDocumento {
+    public abstract Documento criarDocumento();
+}
+
+class GerarHistorico extends GeradorDocumento {
+    public Documento criarDocumento() { return new HistoricoEscolar(); }
+}
+
+class GerarDeclaracaoMatricula extends GeradorDocumento {
+    public Documento criarDocumento() { return new DeclaracaoMatricula(); }
+}
+
+class GerarAtestadoFrequencia extends GeradorDocumento {
+    public Documento criarDocumento() { return new AtestadoFrequencia(); }
 }
