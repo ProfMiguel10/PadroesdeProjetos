@@ -1,0 +1,39 @@
+package padroes.estruturais.composite;
+import java.util.ArrayList;
+import java.util.List;
+interface EstruturaAcademica {
+    void exibir();
+}
+class Aula implements EstruturaAcademica {
+    private String nome;
+
+    public Aula(String nome) { this.nome = nome; }
+    public void exibir() { System.out.println("Aula: " + nome); }
+}
+
+class Modulo implements EstruturaAcademica {
+    private String nome;
+    private List<EstruturaAcademica> itens = new ArrayList<>();
+
+    public Modulo(String nome) { this.nome = nome; }
+
+    public void adicionar(EstruturaAcademica item) { itens.add(item); }
+
+    public void exibir() {
+        System.out.println("Módulo: " + nome);
+        for (EstruturaAcademica e : itens) e.exibir();
+    }
+}
+class Curso implements EstruturaAcademica {
+    private String nome;
+    private List<EstruturaAcademica> itens = new ArrayList<>();
+
+    public Curso(String nome) { this.nome = nome; }
+
+    public void adicionar(EstruturaAcademica item) { itens.add(item); }
+
+    public void exibir() {
+        System.out.println("Curso: " + nome);
+        for (EstruturaAcademica e : itens) e.exibir();
+    }
+}
