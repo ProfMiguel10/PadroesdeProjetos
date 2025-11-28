@@ -1,0 +1,25 @@
+package padroes.estruturais.flyweight;
+import java.util.HashMap;
+import java.util.Map;
+class Sala {
+    private final String bloco;
+    private final int capacidade;
+    public Sala(String bloco, int capacidade) {
+        this.bloco = bloco;
+        this.capacidade = capacidade;
+    }
+    public void usar(String turma) {
+        System.out.println("Turma " + turma + " usando sala no bloco " + bloco + " (capacidade " + capacidade + ")");
+    }
+}
+class SalaFactory {
+    private static Map<String, Sala> cache = new HashMap<>();
+
+    public static Sala getSala(String bloco, int capacidade) {
+        String chave = bloco + capacidade;
+        if (!cache.containsKey(chave)) {
+            cache.put(chave, new Sala(bloco, capacidade));
+        }
+        return cache.get(chave);
+    }
+}
