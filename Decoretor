@@ -1,0 +1,30 @@
+package padroes.estruturais.decorator;
+interface Atendente {
+    void atender();
+}
+class AtendenteBase implements Atendente {
+    public void atender() {
+        System.out.println("Atendimento básico iniciado...");
+    }
+}
+abstract class AtendenteDecorator implements Atendente {
+    protected Atendente atendente;
+
+    public AtendenteDecorator(Atendente atendente) {
+        this.atendente = atendente;
+    }
+}
+class AtendentePrioritario extends AtendenteDecorator {
+    public AtendentePrioritario(Atendente a) { super(a); }
+    public void atender() {
+        atendente.atender();
+        System.out.println("Aplicando.");
+    }
+}
+class AtendenteDigital extends AtendenteDecorator {
+    public AtendenteDigital(Atendente a) { super(a); }
+    public void atender() {
+        atendente.atender();
+        System.out.println("Incluindo.");
+    }
+}
