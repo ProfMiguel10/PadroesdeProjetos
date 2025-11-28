@@ -1,0 +1,33 @@
+package padroes.estruturais.bridge;
+interface CanalEnvio {
+    void enviar(String msg);
+}
+class EnvioEmail implements CanalEnvio {
+    public void enviar(String msg) {
+        System.out.println("Enviando por e-mail: " + msg);
+    }
+}
+class EnvioApp implements CanalEnvio {
+    public void enviar(String msg) {
+        System.out.println("Enviando no app do aluno: " + msg);
+    }
+}
+abstract class Aviso {
+    protected CanalEnvio canal;
+
+    public Aviso(CanalEnvio canal) {
+        this.canal = canal;
+    }
+
+    public abstract void notificar(String conteudo);
+}
+class AvisoFinanceiro extends Aviso {
+    public AvisoFinanceiro(CanalEnvio canal) { super(canal); }
+    public void notificar(String conteudo) { canal.enviar("Financeiro: " + conteudo); }
+}
+
+class AvisoAcademico extends Aviso {
+    public AvisoAcademico(CanalEnvio canal) { super(canal); }
+    public void notificar(String conteudo) { canal.enviar("Acadêmico: " + conteudo); }
+}
+
